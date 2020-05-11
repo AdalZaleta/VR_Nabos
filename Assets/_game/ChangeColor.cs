@@ -21,16 +21,15 @@ public class ChangeColor : MonoBehaviour
     public AudioClip[] music;
     public int idexSong;
 
-    public void Red()
+    public void AlSalir()
     {
-        GetComponent<Renderer>().material.color = Color.red;
+        //GetComponent<Renderer>().material.color = Color.red;
         StopCoroutine("PowerUP");
     }
 
-    public void Blue()
+    public void AlEntrar()
     {
-        GetComponent<Renderer>().material.color = Color.blue;
-        Debug.Log("Hola");
+        //GetComponent<Renderer>().material.color = Color.blue;
         StartCoroutine("PowerUP", timeToWait);
     }
 
@@ -43,8 +42,8 @@ public class ChangeColor : MonoBehaviour
     {
         yield return new WaitForSeconds(_t);
         Debug.Log("Ya pasaron los 2 segundos");
-        GetComponent<Renderer>().material.color = Color.green;
-        info.text = "Herramienta: " + miHerramienta.ToString();
+        //GetComponent<Renderer>().material.color = Color.green;
+        //info.text = "Herramienta: " + miHerramienta.ToString();
         if(miHerramienta == Herramienta.Radio)
         {
             ChangeSong();
