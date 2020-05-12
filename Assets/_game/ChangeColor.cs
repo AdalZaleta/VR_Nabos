@@ -20,6 +20,9 @@ public class ChangeColor : MonoBehaviour
     public TextMeshProUGUI info;
     public AudioClip[] music;
     public int idexSong;
+    public Transform pivot;
+    public Animator animator;
+    public GameObject nabo;
 
     public void AlSalir()
     {
@@ -48,14 +51,38 @@ public class ChangeColor : MonoBehaviour
         {
             ChangeSong();
         }
+        if(miHerramienta == Herramienta.Nabo)
+        {
+            FarmNabo();
+        }
+        if(miHerramienta == Herramienta.Regadera)
+        {
+            MakeRefresh();
+        }
     }
 
     public void ChangeSong()
     {
-        Debug.Log(music.Length.ToString());
         idexSong = (idexSong < music.Length - 1  ? idexSong + 1 : 0);
         GetComponent<AudioSource>().clip = music[idexSong];
-        Debug.Log("Rola actual: " + music[idexSong].name);
         GetComponent<AudioSource>().Play(0);
+        miHerramienta = Herramienta.Semillas;
+    }
+
+    public void FarmNabo()
+    {
+        Comportamiento_Nabo temp = gameObject.GetComponent<Comportamiento_Nabo>();
+        if(temp.mystate == NaboState.Ready)
+        {
+            GameObject go = Instantiate(nabo, pivot.position + Vector3.up * 2.0f, Quaternion.identity);
+            temp.Cosechar();
+        }
+        miHerramienta = Herramienta.Semillas;
+    }
+
+    public void MakeRefresh()
+    {
+        animator.SetTrigger("Make");
+        miHerramienta = Herramienta.Semillas;
     }
 }
